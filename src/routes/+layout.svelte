@@ -27,8 +27,14 @@ const banners = [
   },
   {
     id: 2,
-    imageUrl: "https://huazispace.s3.bitiful.net/2025/07/efb43de563174a798867fbc016e280a8.png", // 替换为第二个banner图片
-    link: "https://bizihu.com/?ref=www.huazi.space", // 替换为第二个链接
+    imageUrl: "https://designstrollweekly.s3.bitiful.net/2025/09/9062b3659c91942d9f20dd85e19cbe6c.png", 
+    link: "https://www.evoker.design/zh?ref=www.huazi.space", 
+    alt: "Evoker"
+  },
+  {
+    id: 3,
+    imageUrl: "https://huazispace.s3.bitiful.net/2025/07/efb43de563174a798867fbc016e280a8.png", 
+    link: "https://bizihu.com/?ref=www.huazi.space", 
     alt: "壁纸湖"
   }
 ];
