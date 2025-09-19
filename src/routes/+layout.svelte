@@ -28,7 +28,7 @@ const banners = [
   {
     id: 2,
     imageUrl: "https://designstrollweekly.s3.bitiful.net/2025/09/9062b3659c91942d9f20dd85e19cbe6c.png", 
-    link: "https://www.evoker.design/zh?ref=www.huazi.space", 
+    link: "https://www.evoker.design?atp=huazi", 
     alt: "Evoker"
   },
   {
