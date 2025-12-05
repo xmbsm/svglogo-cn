@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static'; // ✅ 只保留这一个 adapter
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 // Extensions:
@@ -15,41 +15,30 @@ const mdsvexOptions = {
         themes: ['vitesse-dark'],
         langs: ['javascript', 'typescript', 'bash', 'json']
       });
-      await highlighter.loadLanguage('javascript', 'typescript', 'bash');
+      // 注意：loadLanguage 已经在 langs 中声明过，通常不需要再手动 load
       const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'vitesse-dark' }));
       return `{@html \`${html}\` }`;
     }
   }
 };
 
-// Svelte config:
+// SvelteKit config:
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   extensions: ['.svelte', '.md'],
   preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+      precompress: false,
+      strict: true
+    }),
     alias: {
       '@': './src/*'
     }
   }
-};
-
-// svelte.config.js
-import adapter from '@sveltejs/adapter-static';
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-	kit: {
-		adapter: adapter({
-			// 可选：如果你有动态路由，需要预渲染或 fallback
-			pages: 'build',
-			assets: 'build',
-			fallback: null,
-			precompress: false,
-			strict: true
-		})
-	}
 };
 
 export default config;
