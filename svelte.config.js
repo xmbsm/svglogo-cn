@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static'; // ✅ 只保留这一个 adapter
+import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 // Extensions:
@@ -15,26 +15,20 @@ const mdsvexOptions = {
         themes: ['vitesse-dark'],
         langs: ['javascript', 'typescript', 'bash', 'json']
       });
-      // 注意：loadLanguage 已经在 langs 中声明过，通常不需要再手动 load
+      await highlighter.loadLanguage('javascript', 'typescript', 'bash');
       const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'vitesse-dark' }));
       return `{@html \`${html}\` }`;
     }
   }
 };
 
-// SvelteKit config:
+// Svelte config:
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   extensions: ['.svelte', '.md'],
   preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
   kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
-      precompress: false,
-      strict: true
-    }),
+    adapter: adapter(),
     alias: {
       '@': './src/*'
     }
