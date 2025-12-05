@@ -35,4 +35,21 @@ const config = {
   }
 };
 
+// svelte.config.js
+import adapter from '@sveltejs/adapter-static';
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	kit: {
+		adapter: adapter({
+			// 可选：如果你有动态路由，需要预渲染或 fallback
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
+			precompress: false,
+			strict: true
+		})
+	}
+};
+
 export default config;
