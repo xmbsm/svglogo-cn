@@ -104,11 +104,10 @@ onMount(async () => {
   
   // 其他原有的onMount逻辑
   try {
-    const response = await fetch("https://v6-widget.51.la/v6/Kdb6i5hQGkAkkUoZ/quote.js");
-    const data = await response.text();
-    const num = data.match(/(?<=<\/span><span>).*?(?=<\/span><\/p>)/g);
-    if (num && num[6]) {
-      visitorCount = (parseInt(num[6], 10) + 7500).toString();
+    const response = await fetch("/api/visitor-count");
+    const data = await response.json();
+    if (data.count) {
+      visitorCount = data.count;
     }
   } catch (error) {
     console.error('Failed to fetch visitor count:', error);
